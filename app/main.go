@@ -15,6 +15,9 @@ func home_page(w http.ResponseWriter, r *http.Request) {
 }
 
 func pageHeaders() {
+  http.Handle("/styles/",
+              http.StripPrefix("/styles/",
+                               http.FileServer(http.Dir("./styles/"))))
   http.HandleFunc("/", home_page)
   http.ListenAndServe(":8080", nil)
 }
