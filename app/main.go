@@ -4,9 +4,14 @@ import ("fmt"
         "net/http"
         "html/template")
 
+type data struct {
+  Group string;
+}
+
 func home_page(w http.ResponseWriter, r *http.Request) {
-  t, nil := template.ParseFiles("templace/index.html")
-  t.Execute(w, nil)
+  d := data{"211-331"}
+  t, _ := template.ParseFiles("templace/index.html")
+  t.Execute(w, d)
 }
 
 func pageHeaders() {
