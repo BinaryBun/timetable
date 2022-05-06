@@ -31,7 +31,7 @@ def run_groups(list_of_groups, driver):
 def main():
 	browser = webdriver.Chrome()
 	browser.get("https://rasp.dmami.ru/")
-	run_groups(['201-331'], browser)
+	run_groups(['211-331', '201-351'], browser)
 
 
 if __name__ == '__main__':
