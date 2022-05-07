@@ -9,6 +9,12 @@ type data struct {
   Mon [][]string;
 }
 
+type tmp struct {
+  Ctn int
+}
+
+var Ctn = 0
+
 func (d *data) set_data() {
   d.Group = "211-331"
   d.Mon = [][]string{
@@ -25,10 +31,19 @@ func (d *data) set_data() {
 }
 
 func home_page(w http.ResponseWriter, r *http.Request) {
+  fmt.Println(r.RemoteAddr)
   d := data{}
   d.set_data()
   t, _ := template.ParseFiles("templace/index.html")
   t.Execute(w, d)
+  Ctn ++
+}
+
+func count_page(w http.ResponseWriter, r *http.Request)  {
+  t, _ := template.ParseFiles("templace/ctn.html")
+  data := tmp {Ctn/2}
+  t.Execute(w, data)
+  Ctn --
 }
 
 func pageHeaders() {
@@ -36,6 +51,7 @@ func pageHeaders() {
               http.StripPrefix("/styles/",
                                http.FileServer(http.Dir("./styles/"))))
   http.HandleFunc("/", home_page)
+  http.HandleFunc("/ctn/", count_page)
   http.ListenAndServe(":8080", nil)
 }
 
