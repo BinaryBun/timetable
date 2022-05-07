@@ -11,26 +11,18 @@
   <h1>Расписание московского поликека<br>Группа {{ .Group }}</h1>
   <div class="container">
     <div class="days">
-      Понедельник
+      Понедельник<br><br>
+
+      {{ range .Mon }}
       <div class="content">
-        9:00-10:30
-        <a href="https://online.mospolytech.ru/" class = "cb">
-          <span class = "cb">lms</span>
+        {{index  . 0}}
+        <a href={{index  . 1}} class = "cb">
+          <span class = "cb">{{index  . 2}}</span>
         </a><br><br>
-        Дискретные структуры и компьютинг (Лекция) <br><br>
-        Будылина Евгения Александровна, Набебин Алексей Александрович
-      </div><br>
-
-      <div class="content">
-        10:40-12:10 <span class = "cb">ав4607</span><br><br>
-        Организационное и правовое обеспечение информационной безопасности (Лекция) <br><br>
-        Пашина Алла Дмитриевна
-      </div><br>
-
-      <div class="content">
-        14:30-16:00<br><br>
-        Введение в проектную деятельность (Практика)
-      </div>
+        {{index  . 3}}<br><br>
+        {{index  . 4}}
+        </div><br>
+      {{ end }}
 
     </div>
     <div class="days">Вторник</div>
