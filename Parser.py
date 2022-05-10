@@ -1,5 +1,6 @@
 from selenium import webdriver
 from time import *
+import db
 
 def run_groups(list_of_groups, driver):
 	for group in list_of_groups:
@@ -22,10 +23,13 @@ def run_groups(list_of_groups, driver):
 					data[-1][-1].append(driver.find_element_by_xpath(req+'[4]').text)
 				except:
 					data[-1].pop()
-		
+
+		data_base = db.DB()
 		for i in data:
+			data_base.insert(i)
+		'''for i in data:
 			for j in i:
-				print(j)
+				print(j)'''
 
 
 def main():
