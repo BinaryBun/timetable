@@ -2,6 +2,16 @@ from selenium import webdriver
 from time import *
 import db
 
+def set_map(audit):
+	audit = audit.replace(" ", "")
+	data = {"ав1": "",
+			"ав2": "",
+			"ав3": "",
+			"ав4": "",
+			"ав5": "",
+			"ав6": "",
+			"Пр2": ""}
+
 def run_groups(list_of_groups, driver):
 	for group in list_of_groups:
 		driver.add_cookie({'name' : 'group', 'value' : group})
@@ -27,16 +37,11 @@ def run_groups(list_of_groups, driver):
 		data_base = db.DB()
 		for i in data:
 			data_base.insert(i)
-		'''for i in data:
-			for j in i:
-				print(j)'''
-
 
 def main():
 	browser = webdriver.Chrome()
 	browser.get("https://rasp.dmami.ru/")
 	run_groups(['211-331'], browser)
-
 
 if __name__ == '__main__':
 	main()
