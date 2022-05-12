@@ -3,14 +3,18 @@ from time import *
 import db
 
 def set_map(audit):
-	audit = audit.replace(" ", "")
-	data = {"ав1": "",
-			"ав2": "",
-			"ав3": "",
-			"ав4": "",
-			"ав5": "",
-			"ав6": "",
-			"Пр2": ""}
+	audit = audit.replace(" ", "")[:3]
+	data = {"ав1": "https://yandex.ru/maps/213/moscow/?ll=37.646117%2C55.704199&mode=poi&poi%5Bpoint%5D=37.645163%2C55.704191&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1701016484&utm_source=main_stripe_big&z=20",
+			"ав2": "https://yandex.ru/maps/213/moscow/?ll=37.645775%2C55.704509&mode=poi&poi%5Bpoint%5D=37.645704%2C55.704561&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D167848998809&utm_source=main_stripe_big&z=20",
+			"ав3": "https://yandex.ru/maps/213/moscow/?ll=37.645370%2C55.704667&mode=whatshere&utm_source=main_stripe_big&whatshere%5Bpoint%5D=37.646880%2C55.704792&whatshere%5Bzoom%5D=19&z=20",
+			"ав4": "https://yandex.ru/maps/213/moscow/?ll=37.645370%2C55.704667&mode=poi&poi%5Bpoint%5D=37.646639%2C55.704452&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1737978898&utm_source=main_stripe_big&z=20",
+			"ав5": "https://yandex.ru/maps/213/moscow/?ll=37.644590%2C55.705085&mode=poi&poi%5Bpoint%5D=37.646804%2C55.705504&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D47532892840&utm_source=main_stripe_big&z=20",
+			"ав6": "https://yandex.ru/maps/213/moscow/?ll=37.644590%2C55.705085&mode=poi&poi%5Bpoint%5D=37.646083%2C55.704282&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D178922065429&utm_source=main_stripe_big&z=20",
+			"Пр2": "https://yandex.ru/maps/213/moscow/?ll=37.543975%2C55.833983&mode=poi&poi%5Bpoint%5D=37.543473%2C55.833741&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D126963524657&utm_source=main_stripe_big&z=20",
+			"Пр1", "https://yandex.ru/maps/213/moscow/?ll=37.544323%2C55.833470&mode=poi&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1917526617&utm_source=main_stripe_big&z=20"}
+
+	if audit in data:
+		return data[audit]
 
 def run_groups(list_of_groups, driver):
 	for group in list_of_groups:
