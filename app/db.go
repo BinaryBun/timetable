@@ -28,14 +28,14 @@ func requests(db *sql.DB, req string) {
 }
 
 func main() {
-  login, passwd := "root", "binarybun"
-  db, err := sql.Open("mysql", login+":"+passwd+"@tcp(127.0.0.1:3306)/parser")
+  login, passwd, name := "", "", "timetable"
+  db, err := sql.Open("mysql", login+":"+passwd+"@tcp(127.0.0.1:3306)/"+name)
   //fmt.Println(fmt.Sprintf("%T\n%T", db, err))
 
   if err != nil {
     fmt.Println("Error: ", err.Error())
   } else {
-    requests(db, "SELECT * from passwdords;")
+    requests(db, "SELECT * from `table`;")
   }
   defer db.Close()
 }
