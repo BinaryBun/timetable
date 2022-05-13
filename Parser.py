@@ -53,8 +53,7 @@ def run_groups(list_of_groups, driver):
 
 		data_base = db.DB()
 		for i in data:
-			data_base.insert(i)
-			print(100*'-')
+			data_base.insert(i, group)
 
 def main():
 	browser = webdriver.Chrome()
