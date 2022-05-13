@@ -31,9 +31,18 @@ def run_groups(list_of_groups, driver):
 					req = f'//div[text()="{data[-1][0]}"]/following-sibling::div/child::*/child::div[1][text()="{j.text}"]/following-sibling::div/child::div[@class = "schedule-lesson  "]/div[@class != "clear"]'
 					#print(req)
 					try:
-						data[-1][-1].append(driver.find_element_by_xpath(req+'[@class = "schedule-auditory"]/a').text)
+						tmp = ""
+						for i in driver.find_elements_by_xpath(req+'[@class = "schedule-auditory"]/a'):
+							tmp += f"{i.text}|"
+
+						if tmp == "":
+							tmp = f"{0/0}"
+						data[-1][-1].append(tmp[:-1])
 					except:
-						data[-1][-1].append(driver.find_element_by_xpath(req+'[@class = "schedule-auditory"]').text)
+						tmp = ""
+						for i in driver.find_elements_by_xpath(req+'[@class = "schedule-auditory"]'):
+							tmp += f"{i.text}|"
+						data[-1][-1].append(tmp[:-1])
 					# 2 audit
 
 					data[-1][-1].append(driver.find_element_by_xpath(req+'[@class = "bold small"]').text)
@@ -45,6 +54,7 @@ def run_groups(list_of_groups, driver):
 		data_base = db.DB()
 		for i in data:
 			data_base.insert(i)
+			print(100*'-')
 
 def main():
 	browser = webdriver.Chrome()
