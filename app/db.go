@@ -4,14 +4,26 @@ import ("fmt"
         "database/sql"
 
         _ "github.com/go-sql-driver/mysql")
-/*type db struct {}
 
-func (d *db) read_db (day, group string) string  {
-  return "pass"
-}*/
+func read_db (day, group string) [][5]string {
+  pass := [][5]string {{"f", "f", "f", "f", "f"}}
+  login, passwd, name := "root", "binarybun", "timetable"
+  db, err := sql.Open("mysql", login+":"+passwd+"@tcp(127.0.0.1:3306)/"+name)
+  defer db.Close()
 
-func requests(db *sql.DB, req string) {
-  var time, audit, papir, teacher, date string 
+  if err != nil {
+    fmt.Println("Error: ", err.Error())
+  } else {
+    req := "select `time`, audit, `name`, prepod, `data` from `table` where "
+    req += fmt.Sprintf("`day` = '%s' and `group` = '%s';", day, group)
+    return requests(db, req)
+  }
+  return pass
+}
+
+func requests(db *sql.DB, req string) [][5]string {
+  end_data := [][5]string {}
+  var data [5]string
 
   incert, err := db.Query(req)
   defer incert.Close()
@@ -20,22 +32,10 @@ func requests(db *sql.DB, req string) {
       fmt.Println("Error: ", err.Error())
   } else {
     for incert.Next() {
-      nil := incert.Scan(&name, &passwd)
+      nil := incert.Scan(&data[0], &data[1], &data[2], &data[3], &data[4])
       if nil == nil {}
-      fmt.Println(name, passwd)
+      end_data = append(end_data, data)
     }
   }
-}
-
-func main() {
-  login, passwd, name := "root", "binarybun", "timetable"
-  db, err := sql.Open("mysql", login+":"+passwd+"@tcp(127.0.0.1:3306)/"+name)
-  //fmt.Println(fmt.Sprintf("%T\n%T", db, err))
-
-  if err != nil {
-    fmt.Println("Error: ", err.Error())
-  } else {
-    requests(db, "SELECT * from `table`;")
-  }
-  defer db.Close()
+  return end_data
 }

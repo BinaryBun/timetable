@@ -10,26 +10,85 @@
 <body>
   <h1>Расписание московского поликека<br>Группа {{ .Group }}</h1>
   <div class="container">
-    <div class="days">
-      Понедельник<br><br>
-
+    <div class="days">Понедельник
+      <br><br>
       {{ range .Mon }}
       <div class="content">
         {{index  . 0}}
-        <a href={{index  . 1}} class = "cb">
-          <span class = "cb">{{index  . 2}}</span>
+        <a href="#" class = "cb">
+          <span class = "cb">{{ index . 1 }}</span>
         </a><br><br>
-        {{index  . 3}}<br><br>
-        {{index  . 4}}
+        {{ index . 2 }}<br><br>
+        {{ index . 3 }}<br><br>
+        {{ index . 4 }}
         </div><br>
       {{ end }}
-
     </div>
-    <div class="days">Вторник</div>
-    <div class="days">Среда</div>
-    <div class="days">Четверг</div>
-    <div class="today">Пятница</div>
-    <div class="days">Суббота</div>
+    <div class="days">Вторник
+      <br><br>
+      {{ range .Tue }}
+      <div class="content">
+        {{index  . 0}}
+        <a href="#" class = "cb">
+          <span class = "cb">{{ index . 1 }}</span>
+        </a><br><br>
+        {{ index . 2 }}<br><br>
+        {{ index . 3 }}<br><br>
+        {{ index . 4 }}
+        </div><br>
+      {{ end }}</div>
+    <div class="days">Среда
+      <br><br>
+      {{ range .Wed }}
+      <div class="content">
+        {{index  . 0}}
+        <a href="#" class = "cb">
+          <span class = "cb">{{ index . 1 }}</span>
+        </a><br><br>
+        {{ index . 2 }}<br><br>
+        {{ index . 3 }}<br><br>
+        {{ index . 4 }}
+        </div><br>
+      {{ end }}</div>
+    <div class="days">Четверг
+      <br><br>
+      {{ range .Thu }}
+      <div class="content">
+        {{index  . 0}}
+        <a href="#" class = "cb">
+          <span class = "cb">{{ index . 1 }}</span>
+        </a><br><br>
+        {{ index . 2 }}<br><br>
+        {{ index . 3 }}<br><br>
+        {{ index . 4 }}
+        </div><br>
+      {{ end }}</div>
+    <div class="days">Пятница
+      <br><br>
+      {{ range .Fri }}
+      <div class="content">
+        {{index  . 0}}
+        <a href="#" class = "cb">
+          <span class = "cb">{{ index . 1 }}</span>
+        </a><br><br>
+        {{ index . 2 }}<br><br>
+        {{ index . 3 }}<br><br>
+        {{ index . 4 }}
+        </div><br>
+      {{ end }}</div>
+    <div class="days">Суббота
+      <br><br>
+      {{ range .Sat }}
+      <div class="content">
+        {{index  . 0}}
+        <a href="#" class = "cb">
+          <span class = "cb">{{ index . 1 }}</span>
+        </a><br><br>
+        {{ index . 2 }}<br><br>
+        {{ index . 3 }}<br><br>
+        {{ index . 4 }}
+        </div><br>
+      {{ end }}</div>
   </div>
 </body>
 </html>

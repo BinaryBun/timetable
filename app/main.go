@@ -6,7 +6,12 @@ import ("fmt"
 
 type data struct {
   Group string;
-  Mon [][]string;
+  Mon [][5]string;
+  Tue [][5]string;
+  Wed [][5]string;
+  Thu [][5]string;
+  Fri [][5]string;
+  Sat [][5]string;
 }
 
 type tmp struct {
@@ -17,17 +22,12 @@ var Ctn = 0
 
 func (d *data) set_data() {
   d.Group = "211-331"
-  d.Mon = [][]string{
-                      {"9:00-10:30",
-                "https://online.mospolytech.ru/",
-                "lms",
-                "Дискретные структуры и компьютинг (Лекция)",
-                "Будылина Евгения Александровна, Набебин Алексей Александрович"},
-                      {"10:40-12:10",
-                "https://yandex.ru/maps/213/moscow/?ll=37.646215%2C55.704464&mode=poi&poi%5Bpoint%5D=37.646083%2C55.704282&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1737978898&z=20",
-                "ав4607",
-                "Организационное и правовое обеспечение информационной безопасности (Лекция)",
-                "Пашина Алла Дмитриевна"}}
+  d.Mon = read_db("Понедельник", d.Group)
+  d.Tue = read_db("Вторник", d.Group)
+  d.Wed = read_db("Среда", d.Group)
+  d.Thu = read_db("Четверг", d.Group)
+  d.Fri = read_db("Пятница", d.Group)
+  d.Sat = read_db("Суббота", d.Group)
 }
 
 func home_page(w http.ResponseWriter, r *http.Request) {
