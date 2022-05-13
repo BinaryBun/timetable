@@ -11,7 +11,8 @@ def set_map(audit):
 			"ав5": "https://yandex.ru/maps/213/moscow/?ll=37.644590%2C55.705085&mode=poi&poi%5Bpoint%5D=37.646804%2C55.705504&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D47532892840&utm_source=main_stripe_big&z=20",
 			"ав6": "https://yandex.ru/maps/213/moscow/?ll=37.644590%2C55.705085&mode=poi&poi%5Bpoint%5D=37.646083%2C55.704282&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D178922065429&utm_source=main_stripe_big&z=20",
 			"Пр2": "https://yandex.ru/maps/213/moscow/?ll=37.543975%2C55.833983&mode=poi&poi%5Bpoint%5D=37.543473%2C55.833741&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D126963524657&utm_source=main_stripe_big&z=20",
-			"Пр1": "https://yandex.ru/maps/213/moscow/?ll=37.544323%2C55.833470&mode=poi&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1917526617&utm_source=main_stripe_big&z=20"}
+			"Пр1": "https://yandex.ru/maps/213/moscow/?ll=37.544323%2C55.833470&mode=poi&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1917526617&utm_source=main_stripe_big&z=20",
+			"": ""}
 
 	if audit in data:
 		return data[audit]
@@ -28,13 +29,16 @@ def run_groups(list_of_groups, driver):
 				try:
 					data[-1].append([j.text])
 					req = f'//div[text()="{data[-1][0]}"]/following-sibling::div/child::*/child::div[1][text()="{j.text}"]/following-sibling::div/child::div[@class = "schedule-lesson  "]/div[@class != "clear"]'
+					#print(req)
 					try:
-						data[-1][-1].append(driver.find_element_by_xpath(req+'[1]/a').text)
+						data[-1][-1].append(driver.find_element_by_xpath(req+'[@class = "schedule-auditory"]/a').text)
 					except:
-						data[-1][-1].append(driver.find_element_by_xpath(req+'[1]').text)
-					data[-1][-1].append(driver.find_element_by_xpath(req+'[2]').text)
-					data[-1][-1].append(driver.find_element_by_xpath(req+'[3]/span').text)
-					data[-1][-1].append(driver.find_element_by_xpath(req+'[4]').text)
+						data[-1][-1].append(driver.find_element_by_xpath(req+'[@class = "schedule-auditory"]').text)
+					# 2 audit
+
+					data[-1][-1].append(driver.find_element_by_xpath(req+'[@class = "bold small"]').text)
+					data[-1][-1].append(driver.find_element_by_xpath(req+'[@class = "teacher small"]/span').text)
+					data[-1][-1].append(driver.find_element_by_xpath(req+'[@class = "schedule-dates"]').text)
 				except:
 					data[-1].pop()
 
