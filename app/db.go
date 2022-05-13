@@ -11,7 +11,7 @@ func (d *db) read_db (day, group string) string  {
 }*/
 
 func requests(db *sql.DB, req string) {
-  var name, passwd string
+  var time, audit, papir, teacher, date string 
 
   incert, err := db.Query(req)
   defer incert.Close()
@@ -28,7 +28,7 @@ func requests(db *sql.DB, req string) {
 }
 
 func main() {
-  login, passwd, name := "", "", "timetable"
+  login, passwd, name := "root", "binarybun", "timetable"
   db, err := sql.Open("mysql", login+":"+passwd+"@tcp(127.0.0.1:3306)/"+name)
   //fmt.Println(fmt.Sprintf("%T\n%T", db, err))
 
