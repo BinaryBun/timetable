@@ -25,6 +25,10 @@ h1 {
 }
 
 .days {
+  display: grid;
+  align-content: start;
+  row-gap: 10px;
+
   text-align: center;
   border: solid 2px #e63246;
   border-radius: 8px;
