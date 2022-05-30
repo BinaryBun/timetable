@@ -1,6 +1,7 @@
 package main
 
-import ("fmt"
+import ("log"
+        "fmt"
         "net/http"
         "html/template")
 
@@ -19,9 +20,9 @@ type tmp struct {
 }
 
 var Ctn = 0
+var group = "211-331"
 
 func (d *data) set_data() {
-  d.Group = "211-331"
   d.Mon = read_db("Понедельник", d.Group)
   d.Tue = read_db("Вторник", d.Group)
   d.Wed = read_db("Среда", d.Group)
@@ -31,8 +32,9 @@ func (d *data) set_data() {
 }
 
 func home_page(w http.ResponseWriter, r *http.Request) {
-  fmt.Println(r.RemoteAddr)
-  d := data{}
+  //fmt.Println(r.RemoteAddr)
+  //log.Println(group)
+  d := data{Group: group}
   d.set_data()
   t, _ := template.ParseFiles("templace/index.html")
   t.Execute(w, d)
@@ -46,12 +48,20 @@ func count_page(w http.ResponseWriter, r *http.Request)  {
   Ctn --
 }
 
+func press(w http.ResponseWriter, r *http.Request)  {
+  log.Println(">> get data")
+  log.Println(r.FormValue("group_inp"))
+  group = r.FormValue("group_inp")
+  http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
 func pageHeaders() {
   http.Handle("/styles/",
               http.StripPrefix("/styles/",
                                http.FileServer(http.Dir("./styles/"))))
   http.HandleFunc("/", home_page)
   http.HandleFunc("/ctn/", count_page)
+  http.HandleFunc("/press/", press)
   http.ListenAndServe(":8080", nil)
 }
 

@@ -9,10 +9,12 @@
 </head>
 <body>
   <h1>Расписание московского поликека<br>Группа {{ .Group }}</h1>
-  <div class = "inp">
-    <input type="text" name="nams" id="">
-    <button class=""><a href="/ctn/">Push</a></button>
-  </div>
+  <form action="/press/" method="post">
+    <div class = "inp">
+      <input type="text" name="group_inp" id="group_inp">
+      <button class = "vi_button">Press</button>
+    </div>
+  </form>
   <div class="container">
     <div class="days">Понедельник
       <br>

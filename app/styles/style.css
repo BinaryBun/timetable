@@ -17,7 +17,7 @@ h1 {
     text-align: center;
 }
 
-button {
+.vi_button {
   border: solid 2px #4b6eb9;
   padding: 10px;
   border-radius: 16px;
@@ -25,7 +25,7 @@ button {
   color: #ffffff;
 }
 
-button:active {
+.vi_button:active {
   border: solid 2px #2148ab;
   background-color: #2148ab;
 }
@@ -84,7 +84,6 @@ a {
   background-color: #e63246;
   border: solid 2px #e63246;
   border-radius: 10px;
-  padding: 0px;
   width: fit-content;
 }
 
