@@ -7,8 +7,8 @@ import ("fmt"
 
 func read_db (day, group string) [][5]string {
   pass := [][5]string {{"f", "f", "f", "f", "f"}}
-  login, passwd, name, ip := "root", "binarybun", "timetable", "127.0.0.1"
-  db, err := sql.Open("mysql", login+":"+passwd+f"@tcp({ip}:3306)/"+name)
+  login, passwd, name := "root", "binarybun", "timetable"
+  db, err := sql.Open("mysql", login+":"+passwd+"@tcp(127.0.0.1:3306)/"+name)
   defer db.Close()
 
   if err != nil {

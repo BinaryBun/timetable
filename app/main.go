@@ -3,7 +3,8 @@ package main
 import ("log"
         "fmt"
         "net/http"
-        "html/template")
+        "html/template"
+        "time")
 
 type data struct {
   Group string;
@@ -20,7 +21,7 @@ type tmp struct {
 }
 
 var Ctn = 0
-var group = "211-331"
+const group = "211-331"
 
 func (d *data) set_data() {
   d.Mon = read_db("Понедельник", d.Group)
@@ -33,8 +34,18 @@ func (d *data) set_data() {
 
 func home_page(w http.ResponseWriter, r *http.Request) {
   //fmt.Println(r.RemoteAddr)
-  //log.Println(group)
-  d := data{Group: group}
+  //read cookie
+  group_cook, err := r.Cookie("group")
+  value := ""
+  if err != nil {
+		log.Println("Error occured while reading cookie")
+    value = group
+	} else {
+    value = group_cook.Value
+  }
+  //set data
+  d := data{}
+  d.Group = value
   d.set_data()
   t, _ := template.ParseFiles("templace/index.html")
   t.Execute(w, d)
@@ -49,9 +60,24 @@ func count_page(w http.ResponseWriter, r *http.Request)  {
 }
 
 func press(w http.ResponseWriter, r *http.Request)  {
+  // log
   log.Println(">> get data")
   log.Println(r.FormValue("group_inp"))
-  group = r.FormValue("group_inp")
+  // set coolie
+  http.SetCookie(w, &http.Cookie{
+			Name:       "group",
+			Value:      r.FormValue("group_inp"),
+      Path:       "/",
+  		Domain:     "",
+  		Expires:    time.Time{},
+  		RawExpires: "",
+  		MaxAge:     0,
+      Secure:     false,
+      HttpOnly:   true,
+  		SameSite:   0,
+  		Raw:        "",
+  		Unparsed:   nil,})
+  //redirect
   http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 
